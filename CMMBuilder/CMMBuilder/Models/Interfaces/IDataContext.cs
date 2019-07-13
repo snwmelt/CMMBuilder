@@ -9,11 +9,13 @@ namespace CMMBuilder.Models.Interfaces
         IEnumerable<string> CMMProbes { get; }
         IEnumerable<string> CMMModules { get; }
         IEnumerable<string> CMMTips { get; }
-        int CMMCTE { get; }
-        int CMMLength { get; }
+        double CMMCTE { get; }
+        double CMMLength { get; }
         BitmapImage CMMHeadImage { get; }
         BitmapImage CMMProbeImage { get; }
         BitmapImage CMMModuleImage { get; }
         BitmapImage CMMTipImage { get; }
+
+        void Select( string SelectedType, int IndexValue );
     }
 }

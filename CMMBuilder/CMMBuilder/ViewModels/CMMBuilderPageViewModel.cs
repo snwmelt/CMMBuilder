@@ -17,10 +17,10 @@ namespace CMMBuilder.ViewModels
         private IEnumerable<String>          _CMMModules;
         private IEnumerable<String>          _CMMTips;
         private IDataContext                 _DataContext = new DataContext( );
-        private int                          _SelectedCMMHeadIndex;
-        private int                          _SelectedCMMProbeIndex;
-        private int                          _SelectedCMMModuleIndex;
-        private int                          _SelectedCMMTipIndex;
+        private int                          _SelectedCMMHeadIndex   = -1;
+        private int                          _SelectedCMMProbeIndex  = -1;
+        private int                          _SelectedCMMModuleIndex = -1;
+        private int                          _SelectedCMMTipIndex    = -1;
         #endregion
 
 
@@ -100,7 +100,14 @@ namespace CMMBuilder.ViewModels
 
             set
             {
+                _DataContext.Select( "Head", value );
+
                 _NPCInvoker.AssignPropertyValue( ref PropertyChanged, ref _SelectedCMMHeadIndex, value );
+
+                _NPCInvoker.NotifyPropertyChanged( ref PropertyChanged, "CMMLength" );
+                _NPCInvoker.NotifyPropertyChanged( ref PropertyChanged, "CMMCTE" );
+
+                _NPCInvoker.NotifyPropertyChanged( ref PropertyChanged, "CMMHeadImage" );
             }
         }
 
@@ -113,7 +120,14 @@ namespace CMMBuilder.ViewModels
 
             set
             {
+                _DataContext.Select( "Probe", value );
+
                 _NPCInvoker.AssignPropertyValue( ref PropertyChanged, ref _SelectedCMMProbeIndex, value );
+
+                _NPCInvoker.NotifyPropertyChanged( ref PropertyChanged, "CMMLength" );
+                _NPCInvoker.NotifyPropertyChanged( ref PropertyChanged, "CMMCTE" );
+
+                _NPCInvoker.NotifyPropertyChanged( ref PropertyChanged, "CMMProbeImage" );
             }
         }
 
@@ -126,7 +140,14 @@ namespace CMMBuilder.ViewModels
 
             set
             {
+                _DataContext.Select( "Module", value );
+
                 _NPCInvoker.AssignPropertyValue( ref PropertyChanged, ref _SelectedCMMModuleIndex, value );
+
+                _NPCInvoker.NotifyPropertyChanged( ref PropertyChanged, "CMMLength" );
+                _NPCInvoker.NotifyPropertyChanged( ref PropertyChanged, "CMMCTE" );
+
+                _NPCInvoker.NotifyPropertyChanged( ref PropertyChanged, "CMMModuleImage" );
             }
         }
 
@@ -139,12 +160,19 @@ namespace CMMBuilder.ViewModels
 
             set
             {
+                _DataContext.Select( "Tip", value );
+
                 _NPCInvoker.AssignPropertyValue( ref PropertyChanged, ref _SelectedCMMTipIndex, value );
+
+                _NPCInvoker.NotifyPropertyChanged( ref PropertyChanged, "CMMLength" );
+                _NPCInvoker.NotifyPropertyChanged( ref PropertyChanged, "CMMCTE" );
+
+                _NPCInvoker.NotifyPropertyChanged( ref PropertyChanged, "CMMTipImage" );
             }
         }
 
 
-        public int CMMLength
+        public double CMMLength
         {
             get
             {
@@ -152,7 +180,7 @@ namespace CMMBuilder.ViewModels
             }
         }
 
-        public int CMMCTE
+        public double CMMCTE
         {
             get
             {
