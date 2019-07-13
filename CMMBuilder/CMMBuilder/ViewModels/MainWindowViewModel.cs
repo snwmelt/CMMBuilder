@@ -1,4 +1,5 @@
 ﻿using CMMBuilder.ViewModels.Helpers;
+using CMMBuilder.Views;
 using System.ComponentModel;
 using System.Windows.Controls;
 
@@ -18,6 +19,7 @@ namespace CMMBuilder.ViewModels
         public MainWindowViewModel( )
         {
             _NPCInvoker = new NotifyPropertyChangedInvoker( this );
+            CurrentView = new CMMBuilderPageView( );
         }
 
         /// <summary>
