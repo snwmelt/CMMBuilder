@@ -3,9 +3,13 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:vms="clr-namespace:CMMBuilder.ViewModels"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="CMMBuilderPageView">
+    <Page.DataContext>
+        <vms:CMMBuilderPageViewModel/>
+    </Page.DataContext>
 
     <Grid>
         <Grid.ColumnDefinitions>
@@ -20,10 +24,10 @@
             </Grid.RowDefinitions>
 
             <StackPanel>
-                <ComboBox Margin="2"/>
-                <ComboBox Margin="2"/>
-                <ComboBox Margin="2"/>
-                <ComboBox Margin="2"/>
+                <ComboBox Margin="2" ItemsSource="{Binding Path=CMMHeads}"   SelectedIndex="{Binding Path=SelectedCMMHeadIndex}"/>
+                <ComboBox Margin="2" ItemsSource="{Binding Path=CMMProbes}"  SelectedIndex="{Binding Path=SelectedCMMProbeIndex}"/>
+                <ComboBox Margin="2" ItemsSource="{Binding Path=CMMModules}" SelectedIndex="{Binding Path=SelectedCMMModuleIndex}"/>
+                <ComboBox Margin="2" ItemsSource="{Binding Path=CMMTips}"    SelectedIndex="{Binding Path=SelectedCMMTipIndex}"/>
             </StackPanel>
 
             <StackPanel Grid.Row="1">
@@ -34,7 +38,7 @@
                     </Grid.ColumnDefinitions>
 
                     <TextBlock Margin="2" Grid.Column="0" Text="Overall Length: "/>
-                    <TextBlock Margin="2" Grid.Column="1"/>
+                    <TextBlock Margin="2" Grid.Column="1" Text="{Binding Path=CMMLength}"/>
                 </Grid>
                 
                 <Grid>
@@ -43,8 +47,8 @@
                         <ColumnDefinition/>
                     </Grid.ColumnDefinitions>
 
-                    <TextBlock Grid.Column="0" Text="Overall CTE: "/>
-                    <TextBlock Grid.Column="1"/>
+                    <TextBlock Margin="2"  Grid.Column="0" Text="Overall CTE: "/>
+                    <TextBlock Margin="2"  Grid.Column="1" Text="{Binding Path=CMMCTE}"/>
                 </Grid>
             </StackPanel>
         </Grid>
@@ -57,10 +61,10 @@
                 <RowDefinition/>
             </Grid.RowDefinitions>
 
-            <Image Grid.Row="0" Stretch="Fill"/>
-            <Image Grid.Row="1" Stretch="Fill"/>
-            <Image Grid.Row="2" Stretch="Fill"/>
-            <Image Grid.Row="3" Stretch="Fill"/>
+            <Image Grid.Row="0" Source="{Binding Path=CMMHeadImage}" Stretch="Fill"/>
+            <Image Grid.Row="1" Source="{Binding Path=CMMProbeImage}" Stretch="Fill"/>
+            <Image Grid.Row="2" Source="{Binding Path=CMMModuleImage}" Stretch="Fill"/>
+            <Image Grid.Row="3" Source="{Binding Path=CMMTipImage}" Stretch="Fill"/>
         </Grid>
     </Grid>
 </Page>

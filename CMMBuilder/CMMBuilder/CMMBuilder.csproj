@@ -55,6 +55,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="ViewModels\CMMBuilderPageViewModel.cs" />
     <Compile Include="ViewModels\Helpers\CommandRelay%271.cs" />
     <Compile Include="ViewModels\Helpers\NotifyPropertyChangedInvoker.cs" />
     <Page Include="Views\CMMBuilderPageView.xaml">
