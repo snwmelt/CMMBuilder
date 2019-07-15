@@ -8,20 +8,23 @@ Time Spent:  2hrs
 
 This application was built using Visual Studio 2017, and targets the .Net Framework 4.7.2. 
 
-#Execution
+
+# Execution
 
 In order to execute, simply compile the application in either debug or release mode, and select the components for the final Coordinate 
 Measuring Machine (CMM) from the dropdown ComboBox controls on the left hand side. The Length, and Coefficient of Thermal Expansion (CTE) 
 for the resulting CMM configuration should then be displayed below the ComboBox controls, with the appropriate image assets displayed on 
 the right hand side.
 
-#Bugs
+
+# Bugs
 
 When selecting the 3mm x 30mm CMM Tip from the tip drop down selector there is no corresponding image asset displayed, this is due to a 
 miss-named asset on within the source code. An update of the name of the assosiated resource would fix the bug however due to time 
 constraints this fix was not implemented.
 
-#Improvements 
+
+# Improvements 
 
 The following are improvements to I would make to the application given more time to develop it.
 
