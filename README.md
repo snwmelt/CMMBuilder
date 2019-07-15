@@ -28,58 +28,52 @@ constraints this fix was not implemented.
 
 The following are improvements to I would make to the application given more time to develop it.
 
-UI:
+___UI:___
 
-Add labeles to the ComboBox controls in order to allow the user to know what component type the are related to.
-Add aspect ratio restrictions to the image display controls in order to produce a more refined visual representation and fix resulting 
-image deformation.
-Re-Align and improve control layout to make better use of the space on the left hand side of the application's display area.
+* Add lables to the ComboBox controls in order to allow the user to know what component type the are related to.
+* Add aspect ratio restrictions to the image display controls in order to produce a more refined visual representation and fix resulting image deformation.
+* Re-Align and improve control layout to make better use of the space on the left hand side of the application's display area.
 
-UX:
+___UX:___
 
-Add a control to allow a user could store the resulting CMM for future reference.
-Add a control to allow the user to import a list of CMM components.
-Add a control to allow the exporting of the applications current list of CMM components.
+* Add a control to allow a user could store the resulting CMM for future reference.
+* Add a control to allow the user to import a list of CMM components.
+* Add a control to allow the exporting of the applications current list of CMM components.
 
-Source Code:
+___Source Code:___
 
-Models/Interfaces/ICMMComponent.cs
+__Models/Interfaces/ICMMComponent.cs__
 
-Rather than using a string to denote "type" I would have preffered to make use of an enumeration, to allow for better componentn 
-selection and better data validity testing.
+* Change "Type" propety from String to Enum. Improves component selection, extensibility, and data validity testing.
 
 
-Modles/Interfaces/IDataContest.cs
+__Models/Interfaces/IDataContest.cs__
 
-Improved component updateting via use of an enum in the Select function. 
-Using a Dictionary<Type,ICMMComponent> rather than individual IEnumerable<String> collections in order to allow for extension of 
-CMM Component types availble in the future without having to update data context logic.
-
-
-Modesl/DataContext.cs
-
-Loading in the list of CMMComponents and their properties via a resource file (e.g. a CSV, or Exel Doc) rather than hard-coded Lists.
-Moved the BitmapImage Loading logic out of the DataContext file and abstracting it via it's own interface to decouple the provision 
-of images from the provision of CMM Components.
-Moved the CMMCTE and CMMLength calculations out of the Select method as these are not bound to what compnent has been just selected 
-and thus should not be in this method.
+* Improve component updating via use of an enum in the Select function. 
+* Use Dictionary<Type,ICMMComponent> rather than IEnumerable<String> collections in order to allow for extension of CMM Component types availble without modification.
 
 
-ViewModels/Helpers/CommandRelay`1.cs
+__Models/DataContext.cs__
 
-I would remove this class as it is unused. My initial idea had the user pressing a button to update the data displayed on screen, 
-however given that I opted instead for dynamic updating of displayed information this is no longer required.
-
-
-ViewModels/CMMBuilderPageViewModel.cs
-
-Move the constructor list initialisations to thier own methods.
-All SelectedCMM...Index properties are too verbose and repetitive, I would have moved all the NotifyPropertyChanged calls for CMM 
-Length, CTE, and Images into thier own method in order to improve maintainability, and readability.
+* Load in the list of CMMComponents and their properties via a resource file (e.g. a CSV, or Exel Doc).
+* Move the BitmapImage Loading logic out of the DataContext and abstract access via an interface to decouple the provision of images from the provision of CMM Components.
+* Move the CMMCTE and CMMLength calculations out of the Select method as these are not bound to what component has been just selected.
 
 
-Views/CMMBuilderPageView.xaml
+__ViewModels/Helpers/CommandRelay`1.cs__
 
-Here the bindings for the components provided by the viewmodel are too repetetive, and potentially too restrictive as to how a 
-supporting view model would have to be implemented. I would have preferd to create approprite Data Templates that are based around 
-passing in a more complext object ( like an ICMMComponent instance ), which would allow for fewer required bindgs and more abstraction.
+* Remove as it is unused. The initial concept had the user pressing a button to update the data displayed on screen. However given the dynamic updating of displayed information this is no longer required.
+
+
+__ViewModels/CMMBuilderPageViewModel.cs__
+
+* Move the constructor list initialisations to thier own methods.
+* All SelectedCMM...Index properties are too verbose and repetitive, all NotifyPropertyChanged calls for CMM Length, CTE, and Images 
+should be moved into thier own method in order to improve maintainability, and readability.
+
+
+__Views/CMMBuilderPageView.xaml__
+
+Bindings for the components provided by the viewmodel are too repetetive, and potentially too restrictive. 
+Instead Data Templates based around passing in a more complext objects ( e.g. ICMMComponent instances ), would allow for
+fewer required bindgs and better abstraction.
